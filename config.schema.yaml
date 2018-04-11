@@ -39,3 +39,23 @@
     type: "string"
     secret: false
     required: true
+  basic_auth:
+    description: "Use basic auth instead of oauth (not recommended)"
+    type: boolean
+    secret: false
+    required: false
+    default: false
+  basic_auth_username:
+    description: "Jira username for basic auth"
+    type: string
+    secret: false
+    required: false
+    default: ""
+  basic_auth_password:
+      description: "Jira password for basic auth"
+      type: string
+      secret: true
+      required: false
+      default: ""
+
+

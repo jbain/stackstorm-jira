@@ -31,6 +31,11 @@ class BaseJiraAction(Action):
             'key_cert': rsa_key_content
         }
 
+        if config['basic_auth']:
+            client = JIRA(options=options, basic_auth=(config['basic_auth_username'],
+                                                       config['basic_auth_password']))
+            return client
+
         client = JIRA(options=options, oauth=oauth_creds)
         return client
 

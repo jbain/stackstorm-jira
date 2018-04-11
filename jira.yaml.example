@@ -7,3 +7,6 @@
   poll_interval: 30
   project: "MY_PROJECT"
   verify: True
+  basic_auth: False
+  basic_auth_username: "jirauser"
+  basic_auth_password: "hunter2"
