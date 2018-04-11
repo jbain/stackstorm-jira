@@ -21,23 +21,23 @@ class BaseJiraAction(Action):
 
         options = {'server': config['url'], 'verify': config['verify']}
 
-        rsa_cert_file = config['rsa_cert_file']
-        rsa_key_content = self._get_file_content(file_path=rsa_cert_file)
-
-        oauth_creds = {
-            'access_token': config['oauth_token'],
-            'access_token_secret': config['oauth_secret'],
-            'consumer_key': config['consumer_key'],
-            'key_cert': rsa_key_content
-        }
-
         if config['basic_auth']:
             client = JIRA(options=options, basic_auth=(config['basic_auth_username'],
                                                        config['basic_auth_password']))
             return client
+        else:
+            rsa_cert_file = config['rsa_cert_file']
+            rsa_key_content = self._get_file_content(file_path=rsa_cert_file)
 
-        client = JIRA(options=options, oauth=oauth_creds)
-        return client
+            oauth_creds = {
+                'access_token': config['oauth_token'],
+                'access_token_secret': config['oauth_secret'],
+                'consumer_key': config['consumer_key'],
+                'key_cert': rsa_key_content
+            }
+
+            client = JIRA(options=options, oauth=oauth_creds)
+            return client
 
     def _get_file_content(self, file_path):
         with open(file_path, 'r') as fp:
